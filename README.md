@@ -1,1 +1,2 @@
-# unix-shell-py
+# unix shell py
+Simple Unix Shell in Python
