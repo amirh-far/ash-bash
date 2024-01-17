@@ -28,6 +28,45 @@ def get_history(count):
             print(f"{idx}| {cmd}")
             idx += 1
 
+def del_history():
+    os.system("rm cmds_history.txt")
+    print("command history deleted.")
+
+def pipe_execution(command:str):
+    command_1, command_2 = command.split("|")
+
+    process_1 = subprocess.Popen(
+        command_1,
+        stdout=subprocess.PIPE,
+        text=True,
+        shell=True
+    )
+    process_2 = subprocess.Popen(
+        command_2,
+        stdin=process_1.stdout,
+        stdout=subprocess.PIPE,
+        capture_output=True,
+        shell=True,
+        text=True
+    )
+    if process_2.stderr:
+        print(process_2.stderr)
+    else:
+        print(process_2.stdout)
+
+def normal_execution(command:str):
+    try:
+        result = subprocess.run(command, shell=True, text=True, check=True, capture_output=True)
+        if result.stderr:
+            print(result.stderr)
+        else:
+            print(result.stdout)
+
+
+    except subprocess.CalledProcessError as e:
+        print("Error Output (stderr):", e.stderr)
+
+
 
 def get_and_run_command():
     while True:
@@ -43,16 +82,24 @@ def get_and_run_command():
         elif re.match(r"^prev \d+$", command):
             command, command_idx = command.split(" ")
             command = get_prev_command(command_idx=int(command_idx))
-
+        
+        # get history command
         if command == "history":
            get_history(count=5+1) 
         elif re.match(r"history \d+$", command):
             command, count = command.split(" ")
             get_history(count=int(count)+1)
 
+        # if command is delete history
+        if command == "del-history":
+           del_history()
         
-        res = subprocess.run(command, shell=True, text=True, capture_output=True)
-        print(f"\n{res.stdout}")
+        # handling pipe
+        if "|" in command:
+            pipe_execution(command)
+        # normal execution
+        else:
+            normal_execution(command)
 
         # write the command in the history
         with open("cmds_history.txt", "a") as file:
