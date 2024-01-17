@@ -1,67 +1,70 @@
 import subprocess
 from pathlib import Path
+import os
+import re
 
-def get_last_command():
-    with open("prev_cmds.txt", "r"):
-        # Move to the end of the file
-        file.seek(0, 2)
-
-        # Get the current position in the file
-        current_position = file.tell()
-
-        # Move backward to find the beginning of the last line
-        while current_position > 0:
-            file.seek(current_position - 1)
-            char = file.read(1)
-            print(char)
-
-            # Check if the character is a newline character
-            if char == '\n':
-                break
-
-            # Move the cursor to the previous position
-            current_position -= 1
-
-        # Move the cursor to the beginning of the last line
-    file.seek(current_position + 1)
-
-
-
-
-
+def get_prev_command(command_idx):
+    with open('cmds_history.txt') as file:
+        commands_history = file.read().split("\n")
+        # Checking if file is empty
+        if commands_history:
+            if command_idx == 2:
+                print(f"\r→ {relatvie_path} @ {commands_history[-command_idx]}", end="")
+                return commands_history[-2]
+            else:
+                print(f"\r→ {relatvie_path} @ {commands_history[command_idx]}", end="")
+                return commands_history[command_idx]
+        else:
+            return None
+        
+def get_history(count):
+    with open("cmds_history.txt", "r") as file:
+        file.seek(0)
+        prev_commands_list = file.read().split("\n")
+        history_length = len(prev_commands_list)
+        idx = history_length - count
+        print()
+        for cmd in prev_commands_list[history_length - count: history_length - 1]:
+            print(f"{idx}| {cmd}")
+            idx += 1
 
 
-
-if __name__ == "__main__":
-    # open previous commands file to append new commands
-    file = open("prev_cmds.txt", "a+")
-
-    # get relative path to show on the prompt
-    path = Path.cwd()
-    relatvie_path = path.parts[-1]
-
+def get_and_run_command():
     while True:
         command = input(f"→ {relatvie_path} @ ")
 
         # if user want to exit
         if command == "exit":
             break
-
-        elif command == "^[[A":
-            last_cmd = get_last_command()
-    
-            
-        else:
-            file.write(f"{command}\n")
+        
+        # if command is prev, get previous command
+        if command == "prev":
+            command = get_prev_command(2)
+        elif re.match(r"^prev \d+$", command):
+            command, command_idx = command.split(" ")
+            command = get_prev_command(command_idx=int(command_idx))
 
         if command == "history":
-            with open("prev_cmds.txt", "r") as file:
-                prev_commands_list = file.read().split("\n")
-                for cmd in prev_commands_list:
-                    print(cmd)
-            
+           get_history(count=5+1) 
+        elif re.match(r"history \d+$", command):
+            command, count = command.split(" ")
+            get_history(count=int(count)+1)
 
-        # run the commnad
+        
         res = subprocess.run(command, shell=True, text=True, capture_output=True)
-        # print the result of command that has been run
-        print(res.stdout)
+        print(f"\n{res.stdout}")
+
+        # write the command in the history
+        with open("cmds_history.txt", "a") as file:
+            file.write(f"{command}\n")
+
+        
+if __name__ == "__main__":
+    # get relative path to show on the prompt
+    path = Path.cwd()
+    relatvie_path = path.parts[-1]
+
+    # Get and Run command
+    os.system("clear")
+    get_and_run_command()
+

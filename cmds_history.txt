@@ -1,0 +1,35 @@
+ls
+cd ..
+cd ..
+history
+history
+history
+clear
+ls
+clear
+whats up
+
+clear
+ls
+history
+
+clear
+ls
+ls
+clear
+ls
+clear
+history
+hello
+ls
+echo "hi"
+cd ..
+ls
+cd ..
+ls
+ls
+ls
+history
+history
+history
+history
