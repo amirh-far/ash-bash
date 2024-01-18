@@ -7,3 +7,32 @@ cd home/
 cd .. | ls
 cd .. | ls
 cd .. | cd home/
+echo "str" < iut.txt
+echo "str" < input.txt
+ls > output.txt
+echo < input.txt
+cat < input.txt
+clear
+echo "hello" > output.txt
+echo hello > output.txt
+echo nope > lol.txt
+echo lol > lal.txt
+echo "hello" > output.txt
+grep hel < input.txt
+echo whadap > output.txt
+echo whadap > output.txt
+echo whadap > output.txt
+echo lol > output.txrt
+echo hlloooo > output.txt
+cat < input.txt
+grep 123 < input.txt
+grep 2123 < input.txt
+grep 123 < input.txt
+command <= input.txt
+command <= input.txt
+cldear
+clear
+echo "hello world" =
+echo hello world => out.txt
+echo hello world; ls => out.txt
+command <= out.txt

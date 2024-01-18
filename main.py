@@ -62,6 +62,101 @@ def pipe_execution(command:str):
     output, _ = process_2.communicate()
     print(output)
 
+def execute_command_via_file(command:str):
+    command, input_file = command.split("<=")
+    with open(input_file.strip(), "r") as file:
+        file_content = file.read()
+        commands = file_content.replace("\n", ";")
+    try:
+        result = subprocess.run(
+            commands,
+            shell=True,
+            text=True, 
+            check=True,
+            capture_output=True
+        )
+        if result.stderr:
+            print(result.stderr)
+        else:
+            print(result.stdout)
+    except subprocess.CalledProcessError as e:
+        print(e)
+
+def store_command_in_specified_file(command:str):
+    command, output_file = command.split("=>")
+    try:
+        result = subprocess.run(
+            command,
+            shell=True,
+            text=True, 
+            check=True,
+            capture_output=True
+        )
+        if result.stderr:
+            print(result.stderr)
+        else:
+            print(result.stdout)
+    except subprocess.CalledProcessError as e:
+        print(e)
+
+    try:
+        os.system(f"rm {output_file}; clear")
+    except:
+        # file not found!
+        pass
+
+    with open(output_file.strip(), "w") as file:
+        file.write(command)
+    print("command successfully written in the specified file.")
+
+
+
+
+def output_redirection_execution(command:str):
+    command, output_file = command.split(">")
+    try:
+        result = subprocess.run(
+            command,
+            shell=True,
+            text=True, 
+            check=True,
+            capture_output=True
+        )
+    except subprocess.CalledProcessError as e:
+        print(e)
+
+    if result.stderr:
+        print(f"fail: {result.stderr}")
+    else:
+        try:
+            os.system(f"rm {output_file}; clear")
+        except:
+            # file not found!
+            pass
+        with open(output_file.strip(), "w") as file:
+            file.write(result.stdout)
+        print("command output successfully written in the specified file.")
+
+def input_redirection_execution(command:str):
+    command, input_file = command.split("<")
+    
+    with open(input_file.strip(), "r") as file:
+        try:
+            result = subprocess.run(
+                    command,
+                    stdin=file,
+                    shell=True,
+                    text=True, 
+                    check=True,
+                    capture_output=True
+                )
+            if result.stderr:
+                print(result.stderr)
+            else:
+                print(result.stdout) 
+        except subprocess.CalledProcessError as e:
+            print(e)
+
 
 def normal_execution(command:str):
     try:
@@ -79,7 +174,7 @@ def normal_execution(command:str):
             print(result.stdout)
 
     except subprocess.CalledProcessError as e:
-        print("Error Output (stderr):", e.stderr)
+        print(e)
 
 
 def get_and_run_command():
@@ -113,6 +208,14 @@ def get_and_run_command():
         if "|" in command:
             pipe_execution(command)
         # normal execution
+        elif "<=" in command:
+            execute_command_via_file(command)
+        elif "=>" in command:
+            store_command_in_specified_file(command)
+        elif ">" in command:
+            output_redirection_execution(command)
+        elif "<" in command:
+            input_redirection_execution(command)
         else:
             normal_execution(command)
 
