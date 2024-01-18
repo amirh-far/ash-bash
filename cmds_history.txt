@@ -1,23 +1,9 @@
 del-history
 history
-cd ..
-ls
-cd ..
-ls
-cd ..
-cd ..
-ls
-cd ..
-cd ..
-ls
-cd ..
-ls
-cd ..;ls
-ls
-cd ..
-cd ..
 history
 history
-echo hello world > output.txt
-echo command
-echo hello
+ls
+cd home/
+cd .. | ls
+cd .. | ls
+cd .. | cd home/

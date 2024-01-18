@@ -22,11 +22,21 @@ def get_history(count):
         file.seek(0)
         prev_commands_list = file.read().split("\n")
         history_length = len(prev_commands_list)
-        idx = history_length - count
-        print()
-        for cmd in prev_commands_list[history_length - count: history_length - 1]:
-            print(f"{idx}| {cmd}")
-            idx += 1
+        if count < history_length:
+            idx = history_length - count
+            print()
+            
+            for cmd in prev_commands_list[history_length - count: history_length - 1]:
+                print(f"{idx}| {cmd}")
+                idx += 1
+        else:
+            idx = 0
+            for cmd in prev_commands_list[: history_length - 1]:
+                print(f"{idx}| {cmd}")
+                idx += 1
+
+
+            
 
 def del_history():
     os.system("rm cmds_history.txt")
@@ -45,27 +55,30 @@ def pipe_execution(command:str):
         command_2,
         stdin=process_1.stdout,
         stdout=subprocess.PIPE,
-        capture_output=True,
         shell=True,
         text=True
     )
-    if process_2.stderr:
-        print(process_2.stderr)
-    else:
-        print(process_2.stdout)
+    output, _ = process_2.communicate()
+    print(output)
+
 
 def normal_execution(command:str):
     try:
-        result = subprocess.run(command, shell=True, text=True, check=True, capture_output=True)
+        result = subprocess.run(
+            command,
+            shell=True,
+            text=True, 
+            check=True,
+            capture_output=True
+        )
+
         if result.stderr:
             print(result.stderr)
         else:
             print(result.stdout)
 
-
     except subprocess.CalledProcessError as e:
         print("Error Output (stderr):", e.stderr)
-
 
 
 def get_and_run_command():
