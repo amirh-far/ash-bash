@@ -3,6 +3,7 @@ from pathlib import Path
 import os
 import re
 
+
 def get_prev_command(command_idx):
     with open('cmds_history.txt') as file:
         commands_history = file.read().split("\n")
@@ -16,7 +17,8 @@ def get_prev_command(command_idx):
                 return commands_history[command_idx]
         else:
             return None
-        
+
+
 def get_history(count):
     with open("cmds_history.txt", "r") as file:
         file.seek(0)
@@ -34,13 +36,12 @@ def get_history(count):
             for cmd in prev_commands_list[: history_length - 1]:
                 print(f"{idx}| {cmd}")
                 idx += 1
-
-
-            
+     
 
 def del_history():
     os.system("rm cmds_history.txt")
     print("command history deleted.")
+
 
 def pipe_execution(command:str):
     command_1, command_2 = command.split("|")
@@ -83,6 +84,7 @@ def normal_execution(command:str):
 
 def get_and_run_command():
     while True:
+        # get input from user
         command = input(f"→ {relatvie_path} @ ")
 
         # if user want to exit
@@ -124,7 +126,7 @@ if __name__ == "__main__":
     path = Path.cwd()
     relatvie_path = path.parts[-1]
 
-    # Get and Run command
     os.system("clear")
+    # Get and Run command
     get_and_run_command()
 
