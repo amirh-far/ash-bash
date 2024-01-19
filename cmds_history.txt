@@ -36,3 +36,10 @@ echo "hello world" =
 echo hello world => out.txt
 echo hello world; ls => out.txt
 command <= out.txt
+ash-help
+ash-help
+ash-help
+ash-help
+ash-help
+ash-help
+ash-help
