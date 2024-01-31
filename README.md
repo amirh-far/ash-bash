@@ -17,12 +17,20 @@ Executing in pipe mode is also implemented.
 
 ## Features
 Different commands or modes are supported:<br>
-- prev           -> get previous command
-- history        -> print command history
-- del-history    -> delete command history
-- |              -> execute in pipe mode
-- =>             -> store command in a file
-- <=             -> run commands from a file
-- >              -> store command output in a file
-- <              -> run command via options which are stored in a file
+- prev
+  - get previous command
+- history
+  - print command history
+- del-history
+  - delete command history
+- |
+  - execute in pipe mode
+- =>
+  - store command in a file
+- <=
+  - run commands from a file
+- '>'
+  - store command output in a file
+- <
+  - run command via options which are stored in a file
 
