@@ -1,45 +1,39 @@
 del-history
-history
-history
+clear
+cd ..
+ls
 history
 ls
-cd home/
-cd .. | ls
-cd .. | ls
-cd .. | cd home/
-echo "str" < iut.txt
-echo "str" < input.txt
-ls > output.txt
-echo < input.txt
-cat < input.txt
+history
+ls
+ash-help
+ash-help
+ash-help
+ash-help
+ls
+ls
+history
+ash-help
+ls | cat output.txt
 clear
-echo "hello" > output.txt
-echo hello > output.txt
-echo nope > lol.txt
-echo lol > lal.txt
-echo "hello" > output.txt
-grep hel < input.txt
-echo whadap > output.txt
-echo whadap > output.txt
-echo whadap > output.txt
-echo lol > output.txrt
-echo hlloooo > output.txt
-cat < input.txt
-grep 123 < input.txt
-grep 2123 < input.txt
-grep 123 < input.txt
-command <= input.txt
-command <= input.txt
-cldear
+ls | echo
+ls | cat
+ls |
+ls | cd ..
+ls | cat
 clear
-echo "hello world" =
-echo hello world => out.txt
-echo hello world; ls => out.txt
+ash-help
+ash-help
+echo hello => lol.txt
+ls; cd ..; pwd; => u.txt
 command <= out.txt
+echo arian > arian.txt
+cat < output.txt
+cd < input.txt
+echo < input.txt
 ash-help
-ash-help
-ash-help
-ash-help
-ash-help
-ash-help
-ash-help
+ls
+pwd
+sudo update
+ls > output.txt
+echo hello > input.txt

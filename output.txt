@@ -1,1 +1,11 @@
-hlloooo
+OS_Extra_Project.pdf
+README.md
+cmds_history.txt
+input.txt
+main.py
+out.txt
+output.txt
+requirements.txt
+shelltemplate.c
+unix-shell.code-workspace
+venv

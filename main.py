@@ -200,17 +200,21 @@ def get_and_run_command():
         # if user want to exit
         if command == "exit":
             break
-
-        elif command == "ash-help":
-            get_help()
         
         # if command is prev, get previous command
         elif command == "prev":
             command = get_prev_command(2)
+            normal_execution(command)
+
         elif re.match(r"^prev \d+$", command):
             command, command_idx = command.split(" ")
             command = get_prev_command(command_idx=int(command_idx))
-        
+            normal_execution(command)
+
+        # get help 
+        elif command == "ash-help":
+            get_help()
+
         # get history command
         elif command == "history":
            get_history(count=5+1) 
