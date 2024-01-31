@@ -37,3 +37,9 @@ pwd
 sudo update
 ls > output.txt
 echo hello > input.txt
+ash-help
+history
+history
+ash-help
+history
+ash-help
