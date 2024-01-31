@@ -250,7 +250,6 @@ if __name__ == "__main__":
     # get relative path to show on the prompt
     path = Path.cwd()
     relatvie_path = path.parts[-1]
-
     os.system("clear")
     print("run ash-help for command list.")
     # Get and Run command
