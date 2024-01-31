@@ -33,4 +33,13 @@ Different commands or modes are supported:<br>
   - store command output in a file
 - <
   - run command via options which are stored in a file
+## Preview
+### ash-help
+<p>
+  <img src="https://github.com/amirh-far/ash-bash/blob/main/readme-images/ash-help.png"/>
+</p>
 
+### history
+<p>
+  <img src="https://github.com/amirh-far/ash-bash/blob/main/readme-images/history.png"/>
+</p>
