@@ -47,4 +47,4 @@ Different commands or modes are supported:<br>
 ### Contributing
 Feel free to contribute on this repo.<br>
 If you have any questions, errors etc. feel free to ask.<br>
-Links are available in [my git profile](https://github.com/amirh-far).
+Links are available in my [git profile](https://github.com/amirh-far).
