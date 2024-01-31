@@ -250,6 +250,14 @@ if __name__ == "__main__":
     # get relative path to show on the prompt
     path = Path.cwd()
     relatvie_path = path.parts[-1]
+#     print(
+#         """\n    _        _       ____            _     
+#    / \   ___| |__   | __ )  __ _ ___| |__  
+#   / _ \ / __| '_ \  |  _ \ / _` / __| '_ \ 
+#  / ___ \\__  \ | | | | |_) | (_| \__ \ | | |
+# /_/   \_\___/_| |_| |____/ \__,_|___/_| |_|
+# \n\n\n"""
+#     )
     os.system("clear")
     print("run ash-help for command list.")
     # Get and Run command
